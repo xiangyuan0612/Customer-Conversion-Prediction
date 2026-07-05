@@ -177,6 +177,3 @@ This model helps:
 - Cross-validation pruning
 - AUC-based model selection
 
----
-
-# 📁 11. Project Structure
