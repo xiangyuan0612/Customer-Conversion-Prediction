@@ -1,44 +1,37 @@
 # 📊 Customer Subscription Prediction — Machine Learning Project
 
-A machine learning project focused on predicting whether a customer will subscribe to a long-term deposit product using multiple classification models and probability threshold optimization.
+A machine learning project focused on predicting whether a customer will subscribe to a long-term deposit product using classification models and ROC-based threshold optimization.
 
-> 🎯 Goal: Maximize business conversion while maintaining strong recall of potential customers.
+> 🎯 Objective: Maximize customer conversion while maintaining strong sensitivity and specificity.
 
 ---
 
-## 🧠 Project Overview
+# 🧠 1. Project Overview
 
-This project evaluates and compares three machine learning models:
+This project builds and compares three classification models:
 
-- K-Nearest Neighbors (KNN)
+- KNN (K-Nearest Neighbors)
 - Logistic Regression (LASSO)
 - Decision Tree
 
-The dataset is highly imbalanced:
+Dataset is highly imbalanced:
 
 - Deposit No: 89.41%
 - Deposit Yes: 10.59%
 
-To handle this, stratified sampling and threshold tuning were applied.
+---
+
+# 📊 2. Data Split Strategy
+
+- Total observations: 3681
+- Train/Test split: 70% / 30%
+- Stratified sampling used to maintain class distribution
 
 ---
 
-## 📊 Data Pipeline
+# 📌 3. Feature Selection
 
-### Dataset Split Strategy
-- Total records: **3681**
-- Train/Test split: **70% / 30%**
-- Stratified sampling used to preserve class distribution
-
-📌 Key challenge: class imbalance
-
----
-
-## 📌 Feature Engineering
-
-### Selected Features (Final Model Input)
-
-**Numerical variables:**
+### Numerical features
 - age
 - duration
 - pdays
@@ -49,80 +42,137 @@ To handle this, stratified sampling and threshold tuning were applied.
 - euribor3m
 - nr.employed
 
-**Categorical variables:**
+### Categorical features
 - month
 - poutcome (one-hot encoded)
 
 ---
 
-## 🤖 Model 1 — KNN Classifier
+# 🤖 4. KNN Model
 
-### Model Tuning
-- Optimal K = **14**
+## 4.1 Impact of K
 
-### Performance
+📌 Optimal K selection analysis
 
-| Metric | Value |
-|--------|------|
-| AUC | 0.877 |
-| Sensitivity | 91.75% |
-| Specificity | 79.44% |
-
-### ROC Curve
-
-![KNN ROC](assets/knn_roc.png)
-
-### Confusion Matrix (Final)
-
-![KNN CM](assets/knn_confusion.png)
+![Figure 1 - KNN K selection](assets/figure_01_knn_k_selection.png)
 
 ---
 
-## 🤖 Model 2 — Logistic Regression (LASSO)
+## 4.2 Initial Confusion Matrix
 
-### Feature Selection
-- LASSO used for coefficient shrinkage and variable selection
-- Optimal λ = **0.001128336**
-
-### Performance
-
-| Metric | Value |
-|--------|------|
-| AUC | **0.917 (Best)** |
-| Sensitivity | 89.69% |
-| Specificity | 81.14% |
-
-### ROC Curve
-
-![Logistic ROC](assets/logistic_roc.png)
-
-### Confusion Matrix (Final)
-
-![Logistic CM](assets/logistic_confusion.png)
+![Figure 2 - KNN confusion matrix](assets/figure_02_knn_confusion.png)
 
 ---
 
-## 🤖 Model 3 — Decision Tree
+## 4.3 Optimal Threshold
 
-### Optimization
-- Pruned using cross-validation
-- Optimal tree size: **4 splits**
+📌 ROC-based threshold tuning
 
-### Performance
-
-| Metric | Value |
-|--------|------|
-| AUC | ~0.87 |
-| Sensitivity | 74.22% |
-| Specificity | 89.29% |
-
-### Model Visualization
-
-![Decision Tree](assets/decision_tree.png)
+![Figure 3 - KNN threshold](assets/figure_03_knn_threshold.png)
 
 ---
 
-## 📈 Model Comparison Summary
+## 4.4 Improved Confusion Matrix
+
+![Figure 4 - KNN improved confusion matrix](assets/figure_04_knn_improved_cm.png)
+
+---
+
+## 4.5 ROC Curve
+
+![Figure 5 - KNN ROC](assets/figure_05_knn_roc.png)
+
+---
+
+## 📊 KNN Performance Summary
+
+- AUC: 0.877  
+- Sensitivity: 91.75%  
+- Specificity: 79.44%
+
+---
+
+# 🤖 5. Logistic Regression (LASSO)
+
+## 5.1 Coefficient Path
+
+📌 Effect of λ on coefficients
+
+![Figure 6 - LASSO coefficients](assets/figure_06_lasso_coefficients.png)
+
+---
+
+## 5.2 Initial Confusion Matrix
+
+![Figure 7 - Logistic initial CM](assets/figure_07_logistic_confusion.png)
+
+---
+
+## 5.3 Optimal Threshold
+
+![Figure 8 - Logistic threshold](assets/figure_08_logistic_threshold.png)
+
+---
+
+## 5.4 Improved Confusion Matrix
+
+![Figure 9 - Logistic improved CM](assets/figure_09_logistic_improved_cm.png)
+
+---
+
+## 5.5 ROC Curve
+
+![Figure 10 - Logistic ROC](assets/figure_10_logistic_roc.png)
+
+---
+
+## 📊 Logistic Regression Performance
+
+- AUC: **0.917 (Best Model)**
+- Sensitivity: 89.69%
+- Specificity: 81.14%
+
+---
+
+# 🌳 6. Decision Tree
+
+## 6.1 Model Selection Curve
+
+![Figure 11 - Tree error curve](assets/figure_11_tree_error_curve.png)
+
+---
+
+## 6.2 Complexity Table
+
+![Figure 12 - Tree complexity table](assets/figure_12_tree_complexity_table.png)
+
+---
+
+## 6.3 Final Tree Structure
+
+![Figure 12b - Decision tree](assets/decision_tree_structure.png)
+
+---
+
+## 6.4 Confusion Matrix
+
+![Figure 13 - Tree confusion matrix](assets/figure_13_tree_confusion_matrix.png)
+
+---
+
+## 📊 Decision Tree Performance
+
+- AUC: ~0.87  
+- Sensitivity: 74.22%  
+- Specificity: 89.29%
+
+---
+
+# 📈 7. Final Model Comparison
+
+![Figure 14 - Model comparison ROC](assets/figure_14_model_comparison_roc.png)
+
+---
 
 | Model | AUC | Sensitivity | Specificity |
 |------|-----|------------|------------|
@@ -132,50 +182,36 @@ To handle this, stratified sampling and threshold tuning were applied.
 
 ---
 
-## 🏆 Final Model Selection
+# 🏆 8. Final Conclusion
 
-### ✅ Winner: Logistic Regression (LASSO)
+✔ Logistic Regression (LASSO) is the best model due to:
 
-**Why it wins:**
 - Highest AUC (0.917)
 - Balanced sensitivity & specificity
 - Strong generalization ability
-- Robust under imbalanced data
+- Robust performance on imbalanced dataset
 
 ---
 
-## 📉 Key Insight (Business Value)
+# 💡 9. Business Impact
 
-This model can:
+This model helps:
 
-- 🎯 Identify high-potential customers more accurately
-- 📈 Increase marketing conversion rate
-- 💰 Reduce cost of targeting low-value customers
-- ⚖️ Balance recall vs precision using threshold tuning
+- 🎯 Identify high-value customers
+- 📈 Improve marketing conversion rate
+- 💰 Reduce marketing cost
+- ⚖️ Optimize targeting strategy
 
 ---
 
-## 📌 Key Techniques Used
+# ⚙️ 10. Key Techniques
 
-- Stratified sampling (imbalanced data handling)
-- ROC curve threshold optimization
+- Stratified sampling
+- ROC curve threshold tuning
 - LASSO feature selection
-- Cross-validation pruning (Decision Tree)
-- Probability-based classification tuning
+- Cross-validation pruning
+- AUC-based model selection
 
 ---
 
-## 📷 Visual Results (From Report)
-
-### KNN Performance
-![KNN Results](assets/knn_full.png)
-
-### Logistic Regression Performance
-![Logistic Results](assets/logistic_full.png)
-
-### Decision Tree Performance
-![Tree Results](assets/tree_full.png)
-
----
-
-## 📁 Project Structure (Suggested)
+# 📁 11. Project Structure
